@@ -107,3 +107,29 @@ md c:\mongodb\mongos
 # Habilita el sharding para la base de datos evento_deportivo:
 
     sh.enableSharding("evento_deportivo");
+# 8. Configurar las colecciones para el sharding
+# Especifica las claves de partición para cada colección:
+
+# Colección equipos
+sh.shardCollection("evento_deportivo.equipos", { "nombre": 1 });
+
+# Colección árbitros
+sh.shardCollection("evento_deportivo.arbitros", { "documento": 1 });
+
+# Colección encuentros
+sh.shardCollection("evento_deportivo.encuentros", { "fecha": 1, "lugar": 1 });
+
+# Colección resultados
+sh.shardCollection("evento_deportivo.resultados", { "encuentro_id": 1 });
+
+# Colección tabla_posiciones
+sh.shardCollection("evento_deportivo.tabla_posiciones", { "equipo_id": 1 });
+
+# 9. Verificar la configuración
+# Ejecuta el siguiente comando para verificar el estado del sharding:
+
+sh.status();
+# Pruebas
+# Insertar datos y observar la distribución: Inserta datos en las colecciones y verifica cómo se distribuyen entre los shards.
+
+# Simular cargas de trabajo: Ejecuta consultas para verificar el rendimiento y asegurarte de que las operaciones están optimizadas.
