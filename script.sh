@@ -133,3 +133,19 @@ sh.status();
 # Insertar datos y observar la distribución: Inserta datos en las colecciones y verifica cómo se distribuyen entre los shards.
 
 # Simular cargas de trabajo: Ejecuta consultas para verificar el rendimiento y asegurarte de que las operaciones están optimizadas.
+
+
+// Caso de Prueba 1: Verificar la distribución de datos entre shards
+db.equipos.getShardDistribution()
+sh.splitAt("evento_deportivo.equipos", { "nombre": "M" });
+
+
+// Caso de Prueba 2: Validar el rendimiento de consultas
+db.equipos.find({ "nombre": "Águilas" }).
+
+// Caso de Prueba 3: Verificar alta disponibilidad tras la caída de un shard
+db.equipos.find()
+
+
+// Caso de Prueba 4: Validar el balanceo automático
+sh.status()
